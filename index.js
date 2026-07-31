@@ -11,12 +11,12 @@ app.use(cors({
     origin: [
         "http://localhost:3000",
         "https://ikemi.vercel.app",
-        "https://ikemi.netlify.app"
     ]
 }));
 app.use(express.json());
 
 
+console.log("RESEND KEY:", process.env.RESEND_API_KEY);
 
 const requestsRouter = require('./routes/requests.js');
 app.use('/api/requests', requestsRouter);
