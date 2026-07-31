@@ -7,7 +7,13 @@ console.log('Loaded env keys:', Object.keys(process.env).filter(k =>
 ));
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:3000",
+        "https://ikemi.vercel.app",
+        "https://ikemi.netlify.app"
+    ]
+}));
 app.use(express.json());
 
 
