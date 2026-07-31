@@ -97,7 +97,6 @@ router.patch('/:id/status', async (req, res) => {
     res.json({ success: true, request: data });
 });
 
-// PATCH /api/requests/:id/reply — admin replies to client, emails client
 router.patch('/:id/reply', async (req, res) => {
     const { message, newStatus } = req.body;
     const { id } = req.params;
