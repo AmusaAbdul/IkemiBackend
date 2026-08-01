@@ -10,6 +10,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // POST /api/requests — new consultation request from the form
 router.post('/', async (req, res) => {
+    console.log("BODY RECEIVED:", req.body); // 👈 ADD THIS
+
     const { fullName, email, eventType, preferredDate, preferredTime, backupDate, location, notes} = req.body;
     const { data, error } = await supabase
         .from('consultation_requests')
@@ -26,8 +28,10 @@ router.post('/', async (req, res) => {
         .select()
         .single();
 
-    if (error) return res.status(500).json({ error: error.message });
-
+    if (error) {
+        console.error("SUPABASE ERROR:", error);
+        return res.status(500).json({ error: error.message });
+    }
     const link = `${process.env.CLIENT_URL}/status/${data.id}`;
     try {
         console.log("SENDING NEW BOOKING EMAIL...");
